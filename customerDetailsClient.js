@@ -10,7 +10,7 @@ define(["N/record"], function (record) {
       var customerId = currentRecord.getValue({ fieldId: "add_new_customer" });
       log.debug("Field Changed:", fieldId);
       log.debug("Selected Customer ID:", customerId);
-      
+
       if (!customerId) {
         // ❌ No customer selected — clear all fields
         currentRecord.setValue({ fieldId: 'custpage_phone', value: '' });
@@ -49,7 +49,7 @@ define(["N/record"], function (record) {
             fieldId: "custpage_duedate",
             value: dueDate,
           });
-          console.log("Customer Info Loaded Successfully:" + currentRecord);
+          log.debug("Customer Info Loaded Successfully:" + currentRecord);
         } catch (e) {
           log.error("Error loading CustomerInfo:", e.message);
         }
