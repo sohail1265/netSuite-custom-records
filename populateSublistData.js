@@ -3,6 +3,18 @@
  * @NScriptType ClientScript
  */
 define(['N/record','N/currentRecord','N/log'], function (record) {
+//  remove old lines form sublists
+  function clearSublistLines(rec, sublistId) {
+    var lineCount = rec.getLineCount({ sublistId: sublistId });
+    for (var i = lineCount - 1; i >= 0; i--) {
+      rec.removeLine({
+        sublistId: sublistId,
+        line: i,
+        ignoreRecalc: true
+      });
+    }
+  }
+
   function fieldChanged(context) {
     var currentRecord = context.currentRecord;
     var fieldId = context.fieldId;
@@ -14,6 +26,11 @@ define(['N/record','N/currentRecord','N/log'], function (record) {
       log.debug('Selected Customer ID:', customerId);
 
       try {
+         // 1️⃣ First clear old data from all child subtabs
+        clearSublistLines(currentRecord, 'recmachcustrecord_child_customer_notes'); // Education
+        clearSublistLines(currentRecord, 'recmachcustrecord_child_perfessional_c'); // Professional Courses
+        clearSublistLines(currentRecord, 'recmachcustrecord_child_ermrgancey');     // Emergency Contacts
+
         var customerRec = record.load({
           type: 'customrecord_custom_info',
           id: customerId
