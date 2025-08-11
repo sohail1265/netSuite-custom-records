@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            
+<table class="header" style="width: 100%;"><tr>
+<td rowspan="4"><#if companyInformation.logoUrl?length != 0><@filecabinet nstype="image" style="float: left; margin: 7px;" src="${companyInformation.logoUrl}" /> </#if></td>
+
+</tr>
+  <tr>
+<td align="right"><span class="number">Invoice</span></td>
+</tr>
+<tr>
+<td align="right"><span class="number">#${record.tranid}</span></td>
+</tr>
+<tr>
+<td align="right"><span>${record.trandate}</span></td>
+</tr>
+</table>
+
+        </macro>
+        <macro id="nlfooter">
+            
+<table class="footer" style="width: 100%;"><tr>
+<td align="right"><pagenumber/> of <totalpages/></td>
+</tr></table>
+
+        </macro>
+    </macrolist>
+    <style type="text/css">
+		* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+            table-layout: auto;
+            margin-top: 10px;
+        }
+        tr.totalrow td {
+            background-color: #e3e3e3;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        tr.totalrow td.next {
+            padding-top: 0;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+        .signatures {
+            page-break-inside: avoid;
+            margin-top: 40px;
+        }
+        .signhere {
+            border-bottom: 1px solid #d3d3d3;
+            height: 15px;
+        }</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+  
+  <table style="width: 100%; margin-top: 10px;">
+    <tr >
+      <td><table>
+        <tr><td> <span style="margin-bottom:2px" class="nameandaddress">${companyInformation.companyName}</span></td></tr>
+        <tr><td><span class="nameandaddress">${companyInformation.addressText}</span></td></tr>
+      </table></td>
+       <td><table>
+         <tr><td> 
+           <span style="padding: 4px; margin-top: 5px; font-weight:bold;">PO #</span><br/>
+           <span style="padding: 4px; margin-top: 5px;" >#${record.tranid}</span>
+         </td></tr>
+         <tr><td> 
+           <span style="padding: 4px; margin-top: 5px; font-weight:bold;">Transection#</span><br/>
+           <span style="padding: 4px; margin-top: 5px;">845678909876</span>
+         </td></tr>
+         <tr><td> 
+           <span style="padding: 4px; margin-top: 5px; font-weight:bold;">status</span><br/>
+           <span style="padding: 4px; margin-top: 5px;">pending</span>
+         </td></tr>
+         <tr><td>
+           <span style="padding: 4px; margin-top: 5px; font-weight:bold;">due date</span><br/>
+           <span style="padding: 4px; margin-top: 5px;">${record.duedate}</span> 
+         </td></tr>
+         <tr><td>
+           <span style="padding: 4px; margin-top: 5px; font-weight:bold;">pending poried #</span><br/>
+           <span style="padding: 4px; margin-top: 5px;">DEC 2024</span> 
+         </td></tr>
+       </table></td>
+       <td><table><tr><td> <span style="padding: 4px; margin-top: 5px;  font-weight:bold;">5000:</span>
+      <span style="padding: 4px; margin-top: 5px;" >AFCF BERMUDA</span></td></tr></table></td>
+    </tr>
+  </table>
+<#list record.item as item>
+<table class="body" style="width: 100.49%; margin-top: 10px; height: 48.5313px;"><tr style="height: 14.9375px; text-align:center; ">
+<th style="width: 50%; height: 20.9375px; font-weight:bold;">Description</th>
+<th style="width: 16.66%; height: 20.9375px; font-weight:bold;">${item.quantity@label}</th>
+<th style="width: 16.66%; height: 20.9375px; font-weight:bold;">Rate</th>
+<th style="width: 16.66%; height: 20.9375px; font-weight:bold;">Amount USD</th>
+</tr>
+<tr style="height: 16.7969px; margin-top:3px ">
+<td style="width: 50%; height: 16.7969px;"><span style="font-weight:bold;">Consulting Fee</span><br/><span>Consulting Fee</span></td>
+<td style="width: 16.66%; height: 16.7969px;">${item.quantity}</td>
+<td style="width: 16.66%; height: 16.7969px;">${item.rate}</td>
+<td style="width: 16.66%; height: 16.7969px;">${item.amount}</td>
+</tr>
+  <!-- <tr style="height: 16.7969px;">
+<td style="width: 50%; height: 16.7969px;"><span style="font-weight:bold;">Bank Charges</span><br/><span>Bank Charges</span></td>
+<td style="width: 16.66%; height: 16.7969px;">1</td>
+<td style="width: 16.66%; height: 16.7969px;">$12:00</td>
+<td style="width: 16.66%; height: 16.7969px;">$12:00</td>
+</tr> -->
+  <!-- <tr style="height: 16.7969px;">
+<td style="width: 50%; height: 16.7969px;"><span style="font-weight:bold;">Contract Liabilty</span><br/><span>Contract Charges</span></td>
+<td style="width: 16.66%; height: 16.7969px;">14</td>
+<td style="width: 16.66%; height: 16.7969px;">$11:00</td>
+<td style="width: 16.66%; height: 16.7969px;">$154:00</td>
+</tr> -->
+<!-- <tr style="height: 16.7969px;">
+<td style="width: 50%; height: 16.7969px;"><span style="font-weight:bold;">Royality Expenses</span><br/><span>Expenses</span></td>
+<td style="width: 16.66%; height: 16.7969px;">12</td>
+<td style="width: 16.66%; height: 16.7969px;">$11:00</td>
+<td style="width: 16.66%; height: 16.7969px;">$132:00</td>
+</tr> -->
+</table>
+  </#list>
+<hr/>
+<table class="total" align="right"><tr>
+<td align="right"><strong>SubTotal</strong></td>
+<td align="right">$538.00</td>
+</tr>
+<tr class="total">
+<td align="right"><strong>Tax Total (0%)</strong></td>
+<td align="right">$0.00</td>
+</tr>
+<tr class="totalrow">
+<td class="next" align="right"><strong>Total</strong></td>
+<td class="next" align="right">$553.00</td>
+</tr>
+</table >
+  <table style="border:2px solid black; border-collapse: separate; border-spacing: 0; width:400px; height:80px;">
+    <tr style="border-bottom: 2px solid black; padding-bottom:5px; font-weight: bold; margin-bottom:0px;"><td>Remarks</td></tr>
+    <tr><td>SQO [Referance: CNVI23456789</td></tr>
+    <tr><td>Requester: John Smith (johnsmith@gmail.com)</td></tr> 
+  </table>
+  <table style="border:2px solid black; border-collapse: separate; border-spacing: 0; width:300px; height:120px; margin-top:15px;">
+    <tr style="margin:1px;"><td>Due Date: 9 December 2024</td></tr>
+    <tr style="margin:1px;"><td>Bank Details</td></tr>
+    <tr style="margin:1px;"><td>Bank Name: DBS Bank LTD</td></tr> 
+    <tr style="margin:1px;"><td>Account Number: 123456789</td></tr>
+  </table>
+
+</body>
+</pdf>
