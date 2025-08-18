@@ -78,10 +78,8 @@ function(record, search, log) {
 
             invoice.commitLine({ sublistId: 'item' });
         }
-
         invoice.save({ ignoreMandatoryFields: true });
     }
-
     function getGroupedLotDetails(itemId, locationId) {
     var results = [];
 
