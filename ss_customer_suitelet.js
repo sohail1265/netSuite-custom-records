@@ -6,7 +6,7 @@
 define(['N/ui/serverWidget', 'N/search'], function (serverWidget, search) {
 
    function safeString(v) {
-        if (v === null || v === undefined) return '';
+        if (v === null || v === undefined) return '';  
         if (Array.isArray(v)) return v.join(', ');
         // Dates/numbers/booleans will stringify fine
         return String(v);
